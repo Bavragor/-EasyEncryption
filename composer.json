@@ -1,0 +1,24 @@
+{
+    "name": "bavragor/security-competition",
+    "description": "https://www.it-talents.de/cms/aktionen/code-competition/code-competition-04-2016",
+    "type": "private",
+    "require": {
+        "php": ">=5.4.0",
+        "ext-zip": "*",
+        "lib-openssl": "*",
+        "defuse/php-encryption": "^2.0",
+        "symfony/console": "~v3.0.6"
+    },
+    "authors": [
+        {
+            "name": "Kevin Mauel",
+            "email": "kevin.mauel2@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SecurityCompetition\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
