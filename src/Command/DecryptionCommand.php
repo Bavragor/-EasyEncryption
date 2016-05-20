@@ -11,9 +11,24 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DecryptionCommand extends Command
 {
+    /**
+     * Mode for reading stuff
+     */
     const MODE_READ = 'r';
+
+    /**
+     * Mode which will be used for writing
+     */
     const MODE_OVERWRITE = 'wa+';
+
+    /**
+     * Name of the decrypted archive
+     */
     const ZIP_NAME = 'package.zip';
+
+    /**
+     * Name of the encrypted file
+     */
     const ENCRYPTED_NAME = 'encrypted';
 
     /**
@@ -46,7 +61,7 @@ class DecryptionCommand extends Command
     {
         $this
             ->setName('security:decrypt')
-            ->setDescription('Decrypt stuff')
+            ->setDescription('Decrypt an encrypted file')
             ->addArgument(
                 'package',
                 InputArgument::REQUIRED,
@@ -74,7 +89,7 @@ class DecryptionCommand extends Command
         $path = realpath($input->getArgument('path'));
 
         if (!is_readable($package) || !is_readable($image) || !is_writable($path)) {
-            $output->writeln('<error>Boom</error>');
+            $output->writeln('<error>Please set the right permissions</error>');
 
             return;
         }
@@ -97,6 +112,10 @@ class DecryptionCommand extends Command
 
         if (!fwrite($resource, $decryptedString)) {
             throw new \Exception('Decrypted file could not be written');
+        }
+
+        if (!$this->zipArchiveService->extractArchive($path . DIRECTORY_SEPARATOR . self::ZIP_NAME, $path)) {
+            throw new \Exception('File could not be extracted');
         }
     }
 }

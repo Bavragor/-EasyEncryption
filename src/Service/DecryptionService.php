@@ -4,7 +4,6 @@ namespace SecurityCompetition\Service;
 
 use Defuse\Crypto\Crypto;
 use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
-use Defuse\Crypto\Key;
 
 class DecryptionService
 {

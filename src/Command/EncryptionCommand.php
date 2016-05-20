@@ -11,9 +11,24 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class EncryptionCommand extends Command
 {
+    /**
+     * Mode for reading stuff
+     */
     const MODE_READ = 'r';
+
+    /**
+     * Mode which will be used for writing
+     */
     const MODE_OVERWRITE = 'wa+';
+
+    /**
+     * Name of the created archive
+     */
     const ZIP_NAME = 'package.zip';
+
+    /**
+     * Name of the encrypted file
+     */
     const ENCRYPTED_NAME = 'encrypted';
 
     /**
@@ -74,7 +89,7 @@ class EncryptionCommand extends Command
         $path = realpath($input->getArgument('path'));
 
         if (!is_readable($files) || !is_readable($image) || !is_writable($path)) {
-            $output->writeln('<error>Boom</error>');
+            $output->writeln('<error>Please set the right permissions</error>');
 
             return;
         }
